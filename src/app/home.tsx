@@ -2,6 +2,7 @@ import { Categories, type CategoriesProps } from '@/components/categories';
 import type { PlaceProps } from '@/components/place';
 import { Places } from '@/components/places';
 import { api } from '@/services/api';
+import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Alert, Text, View } from 'react-native';
 import MapView, { Callout, Marker } from 'react-native-maps';
@@ -108,7 +109,7 @@ export default function Home() {
 						}}
 						image={require('@/assets/pin.png')}
 					>
-						<Callout>
+						<Callout onPress={() => router.navigate(`/market/${item.id}`)}>
 							<View>
 								<Text style={{ fontSize: 14, color: colors.gray[600], fontFamily: fontFamily.medium }}>{item.name}</Text>
 								<Text style={{ fontSize: 12, color: colors.gray[600], fontFamily: fontFamily.regular }}>{item.address}</Text>
@@ -117,6 +118,7 @@ export default function Home() {
 					</Marker>
 				))}
 			</MapView>
+
 			<Places data={markets} />
 		</View>
 	);
